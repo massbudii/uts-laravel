@@ -34,13 +34,13 @@
                                 @forelse ($produk as $product)
                                     <tr>
                                         <td class="text-center">
-                                            <img src="{{ asset('/storage/products/' . $product->image) }}"
+                                            <img src="{{ asset('storage/' . $product->image) }}"
                                                 class="rounded" style="width: 150px">
                                         </td>
                                         <td class="text-center">
-                                            <a href="{{ asset('/storage/pdfs/' . $product->pdf) }}" target="_blank"
+                                            <a href="{{ asset('storage/' . $product->pdf) }}" target="_blank"
                                                 class="rounded" style="width: 150px" class="btn-primary"> <i
-                                                    class="fa-regular fa-file-pdf"></i>
+                                                    class="fa-regular fa-file-pdf"></i> </a>
                                         </td>
                                         <td>{{ $product->title }}</td>
                                         <td>{{ 'Rp ' . number_format($product->price, 2, ',', '.') }}</td>

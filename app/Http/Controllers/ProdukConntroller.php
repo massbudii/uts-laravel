@@ -33,7 +33,7 @@ class ProdukConntroller extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'image' => 'required|image|mimes:jpg,png,jpg|max:2048',
+            'image' => 'required|image|mimes:jpg,png,jpeg|max:2048',
             'pdf' => 'required|mimes:pdf|max:2048',
             'title' => 'required|min:3',
             'deskripsi' => 'required|min:3',
@@ -41,23 +41,19 @@ class ProdukConntroller extends Controller
             'stock' => 'required|numeric',
         ]);
 
+        // SIMPAN IMAGE
+        $imagePath = $request->file('image')->store('products', 'public');
 
+        // SIMPAN PDF
+        $pdfPath = $request->file('pdf')->store('pdfs', 'public');
 
-        // upload image
-        $image = $request->file('image');
-        $image->storeAs('products', $image->hashName(), 'public');
-
-        // upload pdf
-        $pdf = $request->file('pdf');
-        $pdf->storeAs('pdfs', $pdf->hashName(), 'public');
-
-        // upload pdf
-        $validated['image'] = $image->hashName();
-        $validated['pdf'] = $pdf->hashName();
+        $validated['image'] = $imagePath;
+        $validated['pdf'] = $pdfPath;
 
         Product::create($validated);
 
-        return redirect()->route('produk.index')->with('sukses', 'Data berhasil ditambahkan');
+        return redirect()->route('produk.index')
+            ->with('sukses', 'Data berhasil ditambahkan');
     }
 
     /**
@@ -83,7 +79,7 @@ class ProdukConntroller extends Controller
     public function update(Request $request, string $id)
     {
         $validated = $request->validate([
-            'image' => 'nullable|image|mimes:jpg,png,jpg|max:2048',
+            'image' => 'nullable|image|mimes:jpg,png,jpeg|max:2048',
             'pdf' => 'nullable|mimes:pdf|max:2048',
             'title' => 'required|min:3',
             'deskripsi' => 'required|min:3',
@@ -93,26 +89,38 @@ class ProdukConntroller extends Controller
 
         $produk = Product::findOrFail($id);
 
-        //update gambar
+
+        // UPDATE IMAGE
+
         if ($request->hasFile('image')) {
 
-            Storage::delete('public/product/' . $produk->image);
-            $image = $request->file('image');
-            $image->storeAs('products', $image->hashName(), 'public');
-            $validated['image'] = $image->hashName();
+            // hapus file lama
+            if ($produk->image && Storage::disk('public')->exists($produk->image)) {
+                Storage::disk('public')->delete($produk->image);
+            }
+
+            // simpan baru
+            $validated['image'] = $request->file('image')->store('products', 'public');
         }
 
-        // update file
+
+        // UPDATE PDF
+
         if ($request->hasFile('pdf')) {
 
-            Storage::delete('public/pdfs/' . $produk->pdf);
-            $pdf = $request->file('pdf');
-            $pdf->storeAs('pdf', $pdf->hashName(), 'public');
-            $validated['pdf'] = $pdf->hashName();
+            // hapus file lama
+            if ($produk->pdf && Storage::disk('public')->exists($produk->pdf)) {
+                Storage::disk('public')->delete($produk->pdf);
+            }
+
+            // simpan baru
+            $validated['pdf'] = $request->file('pdf')->store('pdfs', 'public');
         }
 
         $produk->update($validated);
-        return redirect()->route('produk.index')->with('sukses', 'Data berhasil ditambahkan');
+
+        return redirect()->route('produk.index')
+            ->with('sukses', 'Data berhasil diupdate');
     }
 
     /**

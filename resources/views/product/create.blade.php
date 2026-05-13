@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <title>Add New Products - SantriKoding.com</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body style="background: lightgray">
 
     <div class="container mt-5 mb-5">
@@ -20,7 +22,8 @@
 
                             <div class="form-group mb-3">
                                 <label class="font-weight-bold">IMAGE</label>
-                                <input type="file" class="form-control @error('image') is-invalid @enderror" name="image">
+                                <input type="file" class="form-control @error('image') is-invalid @enderror"
+                                    name="image">
 
                                 <!-- error message untuk image -->
                                 @error('image')
@@ -31,7 +34,8 @@
                             </div>
                             <div class="form-group mb-3">
                                 <label class="font-weight-bold">File</label>
-                                <input type="file" class="form-control @error('pdf') is-invalid @enderror" name="pdf">
+                                <input type="file" class="form-control @error('pdf') is-invalid @enderror"
+                                    name="pdf">
 
                                 <!-- error message untuk pdf -->
                                 @error('pdf')
@@ -43,7 +47,8 @@
 
                             <div class="form-group mb-3">
                                 <label class="font-weight-bold">TITLE</label>
-                                <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title') }}" placeholder="Masukkan Judul Product">
+                                <input type="text" class="form-control @error('title') is-invalid @enderror"
+                                    name="title" value="{{ old('title') }}" placeholder="Masukkan Judul Product">
 
                                 <!-- error message untuk title -->
                                 @error('title')
@@ -55,7 +60,8 @@
 
                             <div class="form-group mb-3">
                                 <label class="font-weight-bold">DESCRIPTION</label>
-                                <textarea class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi" rows="5" placeholder="Masukkan Description Product">{{ old('deskripsi') }}</textarea>
+                                <textarea class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi" rows="5"
+                                    placeholder="Masukkan Description Product">{{ old('deskripsi') }}</textarea>
 
                                 <!-- error message untuk description -->
                                 @error('deskripsi')
@@ -69,7 +75,9 @@
                                 <div class="col-md-6">
                                     <div class="form-group mb-3">
                                         <label class="font-weight-bold">PRICE</label>
-                                        <input type="number" class="form-control @error('price') is-invalid @enderror" name="price" value="{{ old('price') }}" placeholder="Masukkan Harga Product">
+                                        <input type="number" class="form-control @error('price') is-invalid @enderror"
+                                            name="price" value="{{ old('price') }}"
+                                            placeholder="Masukkan Harga Product">
 
                                         <!-- error message untuk price -->
                                         @error('price')
@@ -82,7 +90,9 @@
                                 <div class="col-md-6">
                                     <div class="form-group mb-3">
                                         <label class="font-weight-bold">STOCK</label>
-                                        <input type="number" class="form-control @error('stock') is-invalid @enderror" name="stock" value="{{ old('stock') }}" placeholder="Masukkan Stock Product">
+                                        <input type="number" class="form-control @error('stock') is-invalid @enderror"
+                                            name="stock" value="{{ old('stock') }}"
+                                            placeholder="Masukkan Stock Product">
 
                                         <!-- error message untuk stock -->
                                         @error('stock')
@@ -95,7 +105,7 @@
                             </div>
 
                             <button type="submit" class="btn btn-md btn-primary me-3">SAVE</button>
-                            <button type="reset" class="btn btn-md btn-warning">RESET</button>
+                            <a href="{{ route('produk.index') }}" class="btn btn-secondary">Lihat Data</a>
 
                         </form>
                     </div>
@@ -107,7 +117,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script>
     <script>
-        CKEDITOR.replace( 'description' );
+        CKEDITOR.replace('description');
     </script>
 </body>
+
 </html>

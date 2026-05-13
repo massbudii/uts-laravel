@@ -83,8 +83,8 @@ class ProdukConntroller extends Controller
     public function update(Request $request, string $id)
     {
         $validated = $request->validate([
-            'image' => 'required|image|mimes:jpg,png,jpg|max:2048',
-            'pdf' => 'required|mimes:pdf|max:2048',
+            'image' => 'nullable|image|mimes:jpg,png,jpg|max:2048',
+            'pdf' => 'nullable|mimes:pdf|max:2048',
             'title' => 'required|min:3',
             'deskripsi' => 'required|min:3',
             'price' => 'required|numeric',

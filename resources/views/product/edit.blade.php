@@ -64,7 +64,7 @@
                             <div class="form-group mb-3">
                                 <label class="font-weight-bold">DESCRIPTION</label>
                                 <textarea class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi" rows="5"
-                                    placeholder="Masukkan deskripsi Product">{{ old('deskripsi', $produk->description) }}</textarea>
+                                    placeholder="Masukkan deskripsi Product">{{ old('deskripsi', $produk->deskripsi) }}</textarea>
 
                                 <!-- error message untuk description -->
                                 @error('deskripsi')
@@ -108,7 +108,7 @@
                             </div>
 
                             <button type="submit" class="btn btn-md btn-primary me-3">UPDATE</button>
-                            <button type="reset" class="btn btn-md btn-warning">RESET</button>
+                            <a href="{{ route('produk.index') }}" class="btn btn-secondary">BATAL</a>
 
                         </form>
                     </div>
